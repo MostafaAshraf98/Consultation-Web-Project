@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const joi = require('joi');
-joi.objectId = require('joi-objectid')(joi);
+const Joi = require('Joi');
+Joi.objectId = require('Joi-objectid')(Joi);
 
 const roomSchema = new mongoose.Schema({
     numberOfSeats: {
@@ -23,8 +23,8 @@ const roomSchema = new mongoose.Schema({
 const Room = mongoose.model('Room', roomSchema);
 
 function validateId(id) {
-    const schema = joi.object({
-        id: joi.objectId().required()
+    const schema = Joi.object({
+        id: Joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;

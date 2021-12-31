@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const joi = require('joi');
+const Joi = require('Joi');
 const Room = require('./room.model');
-joi.objectId = require('joi-objectid')(joi);
+Joi.objectId = require('Joi-objectid')(Joi);
 
 
 const seatSchema = mongoose.Schema({
@@ -29,18 +29,18 @@ const seatSchema = mongoose.Schema({
 const Seat = mongoose.model('Seat', seatSchema);
 
 function validateId(id) {
-    const schema = joi.object({
-        id: joi.objectId().required()
+    const schema = Joi.object({
+        id: Joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;
 }
 
 function validateSeat(seat) {
-    const schema = joi.object({
-        columnNumber: joi.number().min(1).max(5).required(),
-        rowNumber: joi.number().min(1).max(6).required(),
-        roomId: joi.ObjectId().required()
+    const schema = Joi.object({
+        columnNumber: Joi.number().min(1).max(5).required(),
+        rowNumber: Joi.number().min(1).max(6).required(),
+        roomId: Joi.objectId().required()
 
     })
     const result = schema.validate(seat);

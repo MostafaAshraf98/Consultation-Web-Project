@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
-const joi = require("joi");
-const { string } = require("joi");
-joi.objectId = require('joi-objectid')(joi);
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const Joi = require("Joi");
+Joi.objectId = require('Joi-objectid')(Joi);
+const validator = require('validator');
+const emailvalidator = require("email-validator");
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -40,7 +43,7 @@ const userSchema = new mongoose.Schema({
         minlength: 8
     },
     role: {
-        type: string,
+        type: String,
         required: true,
         default: 'customer',
         trim: true,
@@ -53,38 +56,51 @@ const userSchema = new mongoose.Schema({
 
 
 function validateId(id) {
-    const schema = joi.object({
-        id: joi.objectId().required()
+    const schema = Joi.object({
+        id: Joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;
 }
 function validateUser(user) {
-    const schema = joi.object({
-        firstName: joi.string().min(1).max(255).required(),
-        lastName: joi.string().min(1).max(255).required(),
-        userName: joi.string().min(1).max(255).required(),
-        email: joi.string().email().required(),
-        password: joi.string().min(1).max(50).required(),
-        role: joi.string().required().valid('customer', 'manager', 'administrator')
+    const schema = Joi.object({
+        firstName: Joi.string().min(1).max(255).required(),
+        lastName: Joi.string().min(1).max(255).required(),
+        userName: Joi.string().min(1).max(255).required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(1).max(50).required(),
+        role: Joi.string().required().valid('customer', 'manager', 'administrator')
     })
     const result = schema.validate(user);
     return result;
 }
 
+userSchema.pre('save', async function (next) {
+    const user = this;
+    if (user.isModified('password')) { // it will be true if the user is just created or the password field is updated
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+
+    next();
+    //The whole point of this is to run some code before a user is saved and next allows it to know that we are done running our code as their might be async process running , the function wont finish with the end of its implementation
+}) // pre is used to do something before the event
+
 userSchema.methods.generateAuthToken = async function () {
     console.log("generateAuthToken called successfully")
-    const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse')
-
-    user.tokens = user.tokens.concat({ token })
-    await user.save()
+    const user = this;
+    const token = jwt.sign({ _id: user._id.toString() }, 'authenticating');
 
     return token
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ email });
+userSchema.statics.findByCredentials = async (emailOrUsername, password) => {
+    console.log("Finding by credentials");
+    var user;
+    if (emailvalidator.validate(emailOrUsername))
+        user = await User.findOne({ email: emailOrUsername });
+    else
+        user = await User.findOne({ userName: emailOrUsername });
+
     if (!user) {
         throw new Error('Unable to login')
     }

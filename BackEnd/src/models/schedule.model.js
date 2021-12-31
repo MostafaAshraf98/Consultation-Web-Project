@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const joi = require('joi');
-joi.objectId = require('joi-objectid')(joi);
+const Joi = require('Joi');
+Joi.objectId = require('Joi-objectid')(Joi);
 
 const scheduleSchema = mongoose.Schema({
     start: {
@@ -30,20 +30,20 @@ const scheduleSchema = mongoose.Schema({
 const Schedule = mongoose.model('Schedule', scheduleSchema);
 
 function validateId(id) {
-    const schema = joi.object({
-        id: joi.objectId().required()
+    const schema = Joi.object({
+        id: Joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;
 }
 
 function validateSchedule(schedule) {
-    const schema = joi.object({
-        movieId: joi.objectId().required(),
-        roomId: joi.objectId().required(),
-        start: joi.date().required(),
-        end: joi.date().required(),
-        date: joi.date().required()
+    const schema = Joi.object({
+        movieId: Joi.objectId().required(),
+        roomId: Joi.objectId().required(),
+        start: Joi.date().required(),
+        end: Joi.date().required(),
+        date: Joi.date().required()
 
     })
     const result = schema.validate(reservation);
