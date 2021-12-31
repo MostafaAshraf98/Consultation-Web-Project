@@ -40,6 +40,12 @@ const movieSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
+movieSchema.virtual('seats', {
+    ref: 'SeatReservations',
+    localField: 'title',
+    foreignField: 'movieIn'
+})
+
 const Movie = mongoose.model('Movie', movieSchema);
 
 function validateMovie(movie) {

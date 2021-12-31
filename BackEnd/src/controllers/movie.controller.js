@@ -74,7 +74,9 @@ const getMovies = async (req, res) => {
 
 const getMovieBytitle = async (req, res) => {
     try {
-        const title = req.params.title;
+        var title = req.params.title;
+        title = title.toLowerCase();
+        console.log(title);
         if (title == "")
             return res.status(401).send("Please enter the title");
         const movie = await Movie.findOne({ title: title });
@@ -82,7 +84,7 @@ const getMovieBytitle = async (req, res) => {
             return res.status(401).send({ error: "Could not find this movie" });
         res.status(200).send(movie);
     } catch (error) {
-        res.status(401).send({ error: "Could not gind this movie" });
+        res.status(401).send({ error: "Could not find this movie" });
     }
 }
 

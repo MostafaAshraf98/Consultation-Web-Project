@@ -1,32 +1,30 @@
 const mongoose = require('mongoose');
 const Joi = require('Joi');
-const Room = require('./room.model');
 Joi.objectId = require('Joi-objectid')(Joi);
 
 
-const seatSchema = mongoose.Schema({
-    columnNumber: {
+const seatReservationsSchema = mongoose.Schema({
+    seatNumber: {
         type: Number,
-        min: 1,
-        max: 5,
         required: true
 
     },
-    rowNumber: {
-        type: Number,
-        min: 1,
-        max: 6,
-        required: true,
-    },
-    roomId: {
+    userReservation: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Room'
+        ref: 'User'
+    },
+    movieIn:
+    {
+        type: String,
+        required: true,
+        ref: 'Movie'
     }
-
+}, {
+    timestamps: true
 })
 
-const Seat = mongoose.model('Seat', seatSchema);
+const SeatReservations = mongoose.model('SeatReservations', seatReservationsSchema);
 
 function validateId(id) {
     const schema = Joi.object({
@@ -38,17 +36,15 @@ function validateId(id) {
 
 function validateSeat(seat) {
     const schema = Joi.object({
-        columnNumber: Joi.number().min(1).max(5).required(),
-        rowNumber: Joi.number().min(1).max(6).required(),
-        roomId: Joi.objectId().required()
-
+        seatNumber: Joi.array().items(Joi.number()).required(),
+        movieIn: Joi.string().required()
     })
     const result = schema.validate(seat);
     return result;
 }
 
 module.exports = {
-    Seat,
+    SeatReservations,
     validateId,
     validateSeat
 }

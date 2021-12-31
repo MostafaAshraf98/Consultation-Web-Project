@@ -54,6 +54,11 @@ const userSchema = new mongoose.Schema({
 
 }, { timestamps: true })
 
+userSchema.virtual('seats', {
+    ref: 'SeatReservations',
+    localField: '_id',
+    foreignField: 'userReservation'
+})
 
 function validateId(id) {
     const schema = Joi.object({
