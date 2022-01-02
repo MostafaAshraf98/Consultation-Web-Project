@@ -44,7 +44,7 @@ const updateUser = async (req, res) => {
         if (!user)
             res.status(400).send({ error: "This user does not exist" });
         user.role = req.body.role;
-        user.save();
+        await user.save();
         res.status(200).send(user);
 
     } catch (error) {

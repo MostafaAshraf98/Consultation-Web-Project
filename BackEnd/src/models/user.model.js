@@ -90,6 +90,17 @@ userSchema.pre('save', async function (next) {
     //The whole point of this is to run some code before a user is saved and next allows it to know that we are done running our code as their might be async process running , the function wont finish with the end of its implementation
 }) // pre is used to do something before the event
 
+//whenever we user model or an instance of the model and we return it, it automatically removes the password and tokens properties
+//the reason is that when we pass a user object to res.send() it calls json.stringify behind the scenes here we manipulate the json data before it is send 
+//very time json.stringfy is called
+//This is only called when sending back the whole user instance ( in get user profile)
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject()
+    delete userObject.password
+    return userObject
+}
+
 userSchema.methods.generateAuthToken = async function () {
     console.log("generateAuthToken called successfully")
     const user = this;

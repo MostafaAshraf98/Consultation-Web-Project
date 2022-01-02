@@ -3,7 +3,7 @@ const routes = require('./routes/index.route');
 require('./db/mongoose') // Here to make sure that the database is connected
 
 const app = express();
-const port = 3000;
+const port = 8086;
 
 app.use('/posters', express.static('posters'));
 app.use(express.json()); // this is going to automatically pass incoming Json to an Object so we can access it in our request handler

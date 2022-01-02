@@ -2,7 +2,7 @@ const { Movie, validateId, validateMovie } = require('../models/movie.model');
 const multer = require('multer');
 var mkdirp = require('mkdirp');
 
-const port = "localhost:3000/";
+const port = "localhost:8086/";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -75,7 +75,7 @@ const getMovies = async (req, res) => {
 const getMovieBytitle = async (req, res) => {
     try {
         var title = req.params.title;
-        title = title.toLowerCase();
+        // title = title.toLowerCase();
         console.log(title);
         if (title == "")
             return res.status(401).send("Please enter the title");
@@ -84,6 +84,7 @@ const getMovieBytitle = async (req, res) => {
             return res.status(401).send({ error: "Could not find this movie" });
         res.status(200).send(movie);
     } catch (error) {
+        console.log(error);
         res.status(401).send({ error: "Could not find this movie" });
     }
 }
