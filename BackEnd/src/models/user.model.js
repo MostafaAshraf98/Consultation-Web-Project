@@ -48,10 +48,12 @@ const userSchema = new mongoose.Schema({
         default: 'customer',
         trim: true,
         enum: ['customer', 'manager', "administrator"]
+    },
+    pendingManagerRequest: {
+        type: Boolean,
+        required: false,
+        default: false
     }
-
-
-
 }, { timestamps: true })
 
 userSchema.virtual('seats', {

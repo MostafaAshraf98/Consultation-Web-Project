@@ -36,23 +36,26 @@ const addMovie = async (req, res) => {
         return res.status(400).send(error.details[0].message);
     try {
         const user = req.authUser;
-        if (user.role != 'manager')
+        if (user.role == 'customer')
             return res.status(400).send({ error: "A Movie must be added by a manager" });
-        const startTime = req.start;
-        const endTime = req.end;
-        const date = req.date;
-        const room = req.room;
+        const startTime = req.body.start;
+        const endTime = req.body.end;
+        const date = req.body.date;
+        const room = req.body.roomNumber;
+        const title = req.body.title;
         // const overlapping = Movie.aggregate({ $exp: { $lte: [startTime, "$end"], $gte: [endTime, "$start"], $match: [date, "date"], $match: [room, "room"] } });
         var allMovies = await Movie.find();
         for (const movie of allMovies) {
-            if (startTime <= movie.end && endTime >= movie.end && date == movie.date && room == movie.room) {
-
+            console.log(movie);
+            console.log(startTime, endTime, room,)
+            if (startTime <= movie.end && endTime >= movie.end && date == movie.date && room == movie.roomNumber)
                 return res.status(400).send({ error: "There is an overalapping movie in this time" });
-            }
+            if (title == movie.title)
+                return res.status(400).send({ error: "There is a movie with this same title" });
         }
         const movie = new Movie({
             ...req.body,
-            posterImage: port + req.file.path
+            // posterImage: port + req.file.path
         })
         await movie.save();
         res.status(200).send(movie);
@@ -65,7 +68,7 @@ const addMovie = async (req, res) => {
 
 const getMovies = async (req, res) => {
     try {
-        const allMovies = await Movie.find();
+        const allMovies = await Movie.find({}, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 });
         res.status(200).send(allMovies);
     } catch (error) {
         res.status(400).send({ error: "Could not get the movies from db" });
@@ -79,7 +82,7 @@ const getMovieBytitle = async (req, res) => {
         console.log(title);
         if (title == "")
             return res.status(401).send("Please enter the title");
-        const movie = await Movie.findOne({ title: title });
+        const movie = await Movie.findOne({ title: title }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 });
         if (!movie)
             return res.status(401).send({ error: "Could not find this movie" });
         res.status(200).send(movie);
@@ -89,10 +92,53 @@ const getMovieBytitle = async (req, res) => {
     }
 }
 
+const editMovieByTitle = async (req, res) => {
+    const user = req.authUser;
+    const title = req.params.title;
+    console.log(title);
+    if (user.role == "customer")
+        return res.status(400).send({ error: "A customer cannot edit a movie" });
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['title', 'posterImage', 'date', 'start', 'end', 'roomNumber'];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+    if (!isValidOperation)
+        return res.status(400).send({ error: "Invalid updates!" });
+    try {
+        const movieToUpdate = await Movie.findOne({ title: title });
+        if (!movieToUpdate)
+            return res.status(400).send({ error: "Unable to find this movie" });
+        updates.forEach((update) => {
+            movieToUpdate[update] = req.body[update]; // here the bracket notation serves as the property in the object is dynamic
+        });
+
+        // check the overlapping with another movie or the existance of a movie with the same title
+        var allMovies = await Movie.find();
+        for (const movie of allMovies) {
+            if (movieToUpdate.start <= movie.end && movieToUpdate.end >= movie.end && movieToUpdate.date == movie.date && movieToUpdate.roomNumber == movie.roomNumber)
+                return res.status(400).send({ error: "There is an overalapping movie in this time" });
+            if (movieToUpdate.title == movie.title)
+                return res.status(400).send({ error: "There is a movie with this same title" });
+        }
+        await movieToUpdate.save();
+        const obj = movieToUpdate.toObject();
+        delete obj._id;
+        delete obj.__v;
+        delete obj.createdAt;
+        delete obj.updatedAt;
+
+        res.status(200).send(obj);
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({ error: "Unable to edit Movie" });
+    }
+}
+
 module.exports = {
     addMovie,
     upload,
     getMovies,
-    getMovieBytitle
+    getMovieBytitle,
+    editMovieByTitle
 
 }

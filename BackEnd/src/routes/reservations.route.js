@@ -5,7 +5,10 @@ const auth = require('../middlewares/auth');
 
 router.post('/', auth, reservationsController.reserveSeats);
 
-router.get('/:title', reservationsController.getMovieSeatsByTitle)
+router.get('/guest/:title', reservationsController.getMovieSeatsByTitleForGuest)
 
-router.get('/', auth, reservationsController.getUserReservedSeats);
+router.get('/:title', auth, reservationsController.getUserReservedSeatsinMovie);
+
+router.get('/', auth, reservationsController.getMoviesReservedIn);
+
 module.exports = router;

@@ -10,12 +10,6 @@ const movieSchema = new mongoose.Schema({
         required: true,
         maxlength: 255
     },
-    duration:
-    {
-        type: Date,
-        required: false
-
-    },
     posterImage: {
         type: String,
         required: true,
@@ -51,7 +45,7 @@ const Movie = mongoose.model('Movie', movieSchema);
 function validateMovie(movie) {
     const schema = Joi.object({
         title: Joi.string().max(255).required(),
-        duration: Joi.date().required(),
+        posterImage: Joi.string().required(),
         start: Joi.date().required(),
         end: Joi.date().required(),
         date: Joi.date().required(),
