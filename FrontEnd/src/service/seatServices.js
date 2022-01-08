@@ -56,12 +56,11 @@ export async function GetUserSeatsbyMovieTitle(movieTitle) {
 
 
 
-export async function GetUserMovies(movieTitle) {
+export async function GetUserMovies() {
 
   try {
-    const response = await axios.get(SERVER_URL + 'reservation/' + movieTitle, {
-      crossDomain: true
-    });
+    // we should not pass token here .. al customers can view the movie page 
+    const response = await axios.get(SERVER_URL+'reservation/',{headers:{token:localStorage.token}});
 
     return (response)
   } catch (error) {

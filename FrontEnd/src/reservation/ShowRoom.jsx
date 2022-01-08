@@ -33,6 +33,14 @@ import { AddReservation , GetUserSeatsbyMovieTitle , GetSeatsbyMovieTitle } from
     // }
 
     useEffect(() => {
+
+
+        GetMoviebyTitle(text).then((response) => {
+            console.log("The response is ");
+            console.log(response);
+            setImages(response.data);
+          });
+
         //get user photos
         GetSeatsbyMovieTitle(text).then((response) => {
           console.log(response.data);
@@ -45,6 +53,15 @@ import { AddReservation , GetUserSeatsbyMovieTitle , GetSeatsbyMovieTitle } from
               });
         }
       }, []);
+
+
+      if(image.room == 2)
+      {
+        setRoom_2(true);
+      }
+      else{
+        setRoom_2(false);
+      }
 
     const idArray=["1","6","11","13","14","15","25","30"];
     var s="screen";
@@ -79,7 +96,7 @@ import { AddReservation , GetUserSeatsbyMovieTitle , GetSeatsbyMovieTitle } from
     function select(id){
         console.log("seat");
         id.toggleClass("selected seat seat");
-        
+
     };
 
     
