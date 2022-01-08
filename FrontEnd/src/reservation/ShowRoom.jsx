@@ -5,6 +5,7 @@ import './ShowRoom.css';
 import LoginPopup from '../Login/LoginPopup';
 import CreditCard from './CreditCard';
 import { Link } from 'react-router-dom';
+import { AddReservation , GetUserSeatsbyMovieTitle , GetSeatsbyMovieTitle } from "../service/seatServices";
 
 
  const ShowRoom = () => {
@@ -19,6 +20,9 @@ import { Link } from 'react-router-dom';
     const [isLoggedIn, setLoggedIn] = useState(true);
     const [isRoom_2,setRoom_2] = useState(true);
     
+    const [soldSeatArr, setSoldSeatArr] = useState([]);
+    const [selectedSeatArr, setSelectedSeatArr]= useState([]);
+
     // define ref object
     const renderedElements = useRef({});
     // if(num == 0){
@@ -27,6 +31,21 @@ import { Link } from 'react-router-dom';
     // else{
     //     setNum(true);
     // }
+
+    useEffect(() => {
+        //get user photos
+        GetSeatsbyMovieTitle(text).then((response) => {
+          console.log(response.data);
+          setSoldSeatArr(response.data);
+        });
+        if(isLoggedIn){
+            GetUserSeatsbyMovieTitle(text).then((response) => {
+                console.log(response.data);
+                setSelectedSeatArr(response.data);
+              });
+        }
+      }, []);
+
     const idArray=["1","6","11","13","14","15","25","30"];
     var s="screen";
     $('#'+ s).addClass("seat");
@@ -37,13 +56,7 @@ import { Link } from 'react-router-dom';
     //     renderedElements.current[index] = true;
     // }, []);
 
-    useState(() => { for (let i = 0; i < idArray.length; i += 1)
-        {
-            var idSelector = $('#'+ idArray[i] );
-             idSelector.addClass("sold seat");
-              console.log("seat"+idArray[i]+" sold");
-        } });
-      
+ 
     const OpenModal = () => {
         console.log("clicked");
         setLoginOpen(true);
@@ -66,23 +79,33 @@ import { Link } from 'react-router-dom';
     function select(id){
         console.log("seat");
         id.toggleClass("selected seat seat");
+        
     };
 
     
     const renderSeat = (id) => {
         let reserved = false;
-        for (let i = 0; i < idArray.length; i += 1) {
-            if(idArray[i] === id) {
+        let selected = false;
+        for (let i = 0; i < soldSeatArr.length; i += 1) {
+            if(soldSeatArr[i] === id) {
                 reserved = true;
+
             } 
+        }
+        for (let i = 0; i < selectedSeatArr.length; i += 1) {
+            if(selectedSeatArr[i]==id){
+                selected = true;
+            }
         }
         return ( reserved ?
             <div className="seatSold1" id={id} onClick={()=>select($(`#${id}`))}></div>
             :
+            selected?
+            <div className="selected seat" id={id} onClick={()=>select($(`#${id}`))}></div>
+            :
             <div className="seat" id={id} onClick={()=>select($(`#${id}`))}></div>
         );
     }
-
     return (
 
         
