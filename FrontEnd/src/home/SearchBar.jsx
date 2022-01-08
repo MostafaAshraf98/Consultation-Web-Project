@@ -2,6 +2,8 @@ import React, { useState , useEffect } from 'react';
 import './SearchBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import{faSearch} from '@fortawesome/free-solid-svg-icons'
+import {GetMoviebyTitle} from '../service/movieServices'
+
 function SearchBar(props) {
 
     const search = <FontAwesomeIcon icon={faSearch} color="DarkGrey"/>
