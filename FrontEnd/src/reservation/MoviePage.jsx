@@ -6,6 +6,7 @@ import './MoviePage.css';
 import EditMovie from '../managerFeatures/EditMovie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import{faPen} from '@fortawesome/free-solid-svg-icons'
+import {GetMoviebyTitle} from '../service/movieServices'
 
 import { Link } from 'react-router-dom';
 
@@ -35,6 +36,16 @@ const MoviePage = () => {
         $(".PopUp_Edit").addClass("active");
     }
 
+      // useEffect( () =>{
+  //   //get user photos
+  //   GetMoviebyTitle (text).then( response => {
+  //     setImages(response.data);
+  //   })
+
+  // },[])
+
+
+
     return (
 
         <>
@@ -56,6 +67,7 @@ const MoviePage = () => {
                             {isEditModalOpen && (
                             <EditMovie
                             onEditRequest={toggleEditModal}
+                            title={text}
                             />
                             )}
                     </main>
