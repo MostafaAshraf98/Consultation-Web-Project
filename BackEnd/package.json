@@ -12,6 +12,7 @@
     "Joi": "^17.5.0",
     "Joi-objectid": "^4.0.2",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "email-validator": "^2.0.4",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",

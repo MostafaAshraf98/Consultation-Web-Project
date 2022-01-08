@@ -22,38 +22,38 @@ function Login() {
             const [lname,setLastname] = useState("");
         
             const handleLogin = () => {
-                
-                    // UserLogin(loginObj).then( response => {
-                    //      localStorage.setItem('token', response);
-                    //     console.log(response);
-                    // });
-                //------------ call backEnd fn Login
-                //------------ save returned token in local storage using the next line
-                // if(response ==null)
-                // {
-                //    setLoggedIn(false);
-                // }
-                // else{
-                //     setLoggedIn(true);
-                // }
+              console.log("Handling login");
+                    UserLogin(loginObj).then( response => {
+                         localStorage.setItem('token', response);
+                         console.log(response);
+                         if(response ==null)
+                         {
+                            setLoggedIn(false);
+                         }
+                         else{
+                             setLoggedIn(true);
+                         }
+                    });
+                // ------------ call backEnd fn Login
+                // ------------ save returned token in local storage using the next line
             }
 
             const handleSignUp = () => {
                 // event.preventDefault();
 
-                // UserSignup(signUpObj).then( response => {
-                //     localStorage.setItem('token', response);
-                //     console.log(response);
-                // });
-                // //------------ call backEnd fn SignUp --- POST
-                // //------------ save returned token in local storage using the next line
-                // if(response ==null)
-                // {
-                //    setLoggedIn(false);
-                // }
-                // else{
-                //     setLoggedIn(true);
-                // }
+                UserSignup(signUpObj).then( response => {
+                    localStorage.setItem('token', response);
+                    console.log(response);
+                    if(response ==null)
+                    {
+                       setLoggedIn(false);
+                    }
+                    else{
+                        setLoggedIn(true);
+                    }
+                });
+                //------------ call backEnd fn SignUp --- POST
+                //------------ save returned token in local storage using the next line
 
             }
             const handleChangeUsername = (event) => {
@@ -109,7 +109,7 @@ function Login() {
 
              const loginObj ={  
                 "password":password,
-                "userName":username,
+                "emailorusername":username,
              };
 
             function SIGN()
