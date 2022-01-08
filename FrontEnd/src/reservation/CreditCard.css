@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.PopUp_Credit {
+  width: 500px;
+  height: 280px;
+  top: 14%;
+  left: 33%;
+  position: fixed;
+  margin: 6% auto;
+  background: linear-gradient(to right, #cfd1db, #fffffd);
+  padding: 5px;
+  border-radius: 10px;
+  bottom: 40px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 9px rgb(13, 1, 66);
+  color: gray;
+}
+.active {
+  display: block;
+}
+.close_bttn_Credit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: rgb(2, 54, 100);
+  color: gray;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.close_bttn_Credit:hover {
+  background: #aed309;
+}
+.title_Credit {
+  width: 100%;
+  text-align: center;
+  margin: 35px auto;
+  position: relative;
+  color: rgb(2, 47, 87);
+  border-bottom: 2px solid rgb(2, 47, 87);
+}
+.inputGroup_Credit/*the form itself*/ {
+  position: absolute;
+  width: 330px;
+  transition: 0.5s;
+  left: 85px;
+  top: 100px;
+}
+.input_field_Credit /* all the text inputs*/ {
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #aed309;
+  outline: none;
+  background: transparent;
+}
+.submitBttn_Credit /* the submit button*/ {
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  background: linear-gradient(to right, #aed309, #d4e28d);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  color: rgb(2, 47, 87);
+}
+.submitBttn_Credit:hover {
+  outline: none;
+  border: 1px solid #202245;
+}
+
+#specialInputDate {
+  width: 60%;
+  margin-left: 20px;
+  color: gray;
+}
+#specialInputStart {
+  width: 60%;
+  margin-left: 25px;
+  color: gray;
+}
+#specialInputEnd {
+  width: 60%;
+  margin-left: 40px;
+  color: gray;
+}

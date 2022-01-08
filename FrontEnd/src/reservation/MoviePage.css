@@ -1,0 +1,69 @@
+.moviePoster {
+  width: 30%;
+  filter: drop-shadow(10px 10px 10px rgb(22, 20, 16));
+}
+.movieName {
+  display: inline;
+}
+.main_edit {
+  margin: 0 auto;
+  z-index: 5;
+}
+.movieInfo {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+.movieText {
+  margin-left: 40px;
+}
+.movieDate {
+  margin-left: 20px;
+  color: #fff;
+  padding-bottom: 8px;
+}
+
+.movieName {
+  font-size: 83px;
+  font-weight: 800;
+  font-family: monospace;
+  color: #aed309;
+  /* text-shadow: 0 0 14px #ff0000, 0 0 22px #0000ff; */
+}
+.popcorn {
+  background-image: url("giphy.gif");
+  background-size: contain;
+  width: 300px;
+  height: 233px;
+  margin-left: 550px;
+  margin-top: 100px;
+}
+.bookSeat {
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin-top: 20px;
+  margin-left: 69%;
+  background: linear-gradient(to right, #aed309, #dcec95);
+  border: 0;
+  box-shadow: 0 0 10px 5px rgb(13, 1, 66);
+  outline: none;
+  border-radius: 30px;
+  color: #202245;
+  font-weight: 700;
+}
+
+.backButton_movie {
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin-top: 20px;
+  margin-left: 77%;
+  background: linear-gradient(to right, #aed309, #dcec95);
+  border: 0;
+  box-shadow: 0 0 10px 5px rgb(13, 1, 66);
+  outline: none;
+  border-radius: 30px;
+  color: #202245;
+  font-weight: 700;
+}

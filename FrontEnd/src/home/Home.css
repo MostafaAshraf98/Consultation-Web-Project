@@ -1,0 +1,16 @@
+body {
+  /* background-color: rgb(2, 47, 87); */
+  background: linear-gradient(to right, #202245, #0677ac);
+}
+.container_body {
+  padding: 2px 0;
+}
+.topDiv {
+  width: 100%;
+  height: 80px;
+  /* background-color: #aed309; */
+}
+
+.container_movies {
+  margin-left: 200px;
+}

@@ -1,0 +1,7 @@
+.container_reserved {
+  margin-left: 200px;
+}
+.disp_reser_div {
+  display: flex;
+  flex-wrap: wrap;
+}

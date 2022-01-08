@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.TotalPage {
+  height: 100%;
+  width: 100%;
+  background-image: url(cinema.jpg);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+}
+.form-box {
+  width: 380px;
+  height: 300px;
+  top: 100px;
+  position: relative;
+  margin: 6% auto;
+  background: linear-gradient(to right, #202245, #0677ac);
+  padding: 5px;
+  border-radius: 10px;
+  bottom: 40px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 9px rgb(76, 76, 78);
+}
+.FormType-button /* holds toggle button*/ {
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 9px rgb(1, 37, 68);
+}
+.ToggleForm /* button to change from sign in to login*/ {
+  padding: 10px 26px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  color: rgb(2, 47, 87);
+}
+#bttn /* the sign in or log in button*/ {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 110px;
+  height: 100%;
+  background: linear-gradient(to right, #aed309, #dcec95);
+  border-radius: 30px;
+  transition: 0.5s;
+}
+.inputGroupLogin /*the form itself*/ {
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+  left: 50px;
+}
+.inputGroupSignUp/*the form itself*/ {
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+  left: 450px;
+}
+.input_field /* all the text inputs*/ {
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #aed309;
+  outline: none;
+  background: transparent;
+  color: black;
+}
+::placeholder {
+  color: rgb(196, 194, 194);
+}
+.submitBttn /* the submit button*/ {
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  background: linear-gradient(to right, #aed309, #dcec95);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  color: #202245;
+}
+.input_role /* the drop down list*/ {
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 85%;
+  padding: 5px 15px 5px 15px;
+  background: rgb(244, 247, 253);
+  color: gray;
+  margin-top: 10px;
+  position: relative;
+}
+
+.input_role:hover {
+  outline: none;
+  border: 1px solid #202245;
+}
+
+.colorBttn {
+  margin-left: 110px;
+  transition: 0.7s;
+}
+
+.LogForm {
+  left: -400px;
+  transition: 0.7s;
+}
+
+.SignInLog {
+  left: 50px;
+  transition: 0.7s;
+}
+
+.SignBox {
+  height: 500px;
+  top: auto;
+  transition: 0.9s;
+}
+.error1 {
+  font-size: 11px;
+  display: none;
+}
+.error2 {
+  font-size: 11px;
+  display: none;
+}
+.error3 {
+  font-size: 11px;
+  display: none;
+}
+.error4 {
+  font-size: 11px;
+  display: none;
+}
+.ShowError {
+  font-size: 11px;
+  color: rgb(202, 7, 7);
+  display: block;
+}
+.skipButton {
+  width: 11%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-right: 50px;
+  margin-top: 20px;
+  background: linear-gradient(to right, #202245, #0677ac);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 9px rgb(76, 76, 78);
+  color: rgb(244 247 253);
+}
+
+.skipLink {
+  text-decoration: none;
+}

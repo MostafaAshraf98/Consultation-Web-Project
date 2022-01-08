@@ -1,0 +1,15 @@
+#content {
+  display: block;
+  margin: 15px;
+  padding: 0px;
+  position: relative;
+  height: 190px;
+  width: 164px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  filter: drop-shadow(10px 10px 10px rgb(22, 20, 16));
+}
+.column_adj {
+  float: left;
+  padding: 3px;
+}

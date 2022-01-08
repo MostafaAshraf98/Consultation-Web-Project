@@ -1,0 +1,37 @@
+.diplayReserved {
+  display: flex;
+  width: 50%;
+
+  height: 150px;
+  padding-bottom: 4px;
+  /* background-color: lawngreen; */
+}
+
+.reservedInf {
+  display: flex;
+  margin-left: 15px;
+}
+
+.reservedMovie {
+  margin-left: 14px;
+  height: 150px;
+  width: 120px;
+}
+.diplayReserved:hover {
+  filter: drop-shadow(10px 10px 10px rgb(22, 20, 16));
+}
+
+.link {
+  margin-left: 200px;
+  margin-top: 58px;
+}
+
+.text_link {
+  text-decoration: none;
+  font-weight: 600;
+}
+.reservedMovie_Title {
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
