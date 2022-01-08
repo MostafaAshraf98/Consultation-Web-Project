@@ -5,7 +5,7 @@ import $ from "jquery";
 import "./MoviePage.css";
 import EditMovie from "../managerFeatures/EditMovie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faFileImage, faPen } from "@fortawesome/free-solid-svg-icons";
 import { GetMoviebyTitle } from "../service/movieServices";
 
 import { Link } from "react-router-dom";
@@ -41,21 +41,39 @@ const MoviePage = () => {
       console.log(response);
       setImages(response.data);
     });
-  }, []);
+  }, [image]);
 
+  //   var photo;
+  //   useState(() => {
+  //     console.log("Entering the useEffect");
+  //     GetMoviebyTitle(text).then((response) => {
+  //       console.log("The response is ");
+  //       photo = response.data;
+  //       console.log(response);
+  //     });
+  //   });
+
+  //   setImages(photo);
+
+  console.log({
+    "image: ": image,
+  });
   return (
     <>
       <div className="movieInfo">
-        <img className="moviePoster" src={image.posterImage} />
+        <img className="moviePoster" src={url} />
         <div className="movieText">
-          <h1 className="movieName">{image.title} </h1>
+          {/* <h1 className="movieName">{image.title} </h1> */}
+          <h1 className="movieName"> Happy </h1>
           <br />
           <br />
-          <h2 className="movieDate">{image.date}</h2>
+          {/* <h2 className="movieDate">{image.date}</h2> */}
+          <h2 className="movieDate"> 12/12/2020</h2>
           <br />
-          <h2 className="movieDate">{image.start}</h2>
+          {/* <h2 className="movieDate">{image.start}</h2> */}
+          <h2 className="movieDate"> 5 Pm</h2>
           <br />
-          <h2 className="movieDate">{image.room} </h2>
+          <h2 className="movieDate"> 2 </h2>
           <br />
           <div className="popcorn"></div>
           <main className="main_edit">
