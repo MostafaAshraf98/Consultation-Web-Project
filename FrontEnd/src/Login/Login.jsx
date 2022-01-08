@@ -318,6 +318,9 @@ function Login() {
                     :
                         <Navigate to='/Login' />
                      } */}
+                     {isLoggedIn&&
+                        <Navigate to='/' />     
+                     }
 
                 </form>
 
