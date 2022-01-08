@@ -6,7 +6,7 @@ const SERVER_URL = "http://localhost:8086/api/";
 
 // Add reservation
 export async function AddReservation(object) {
-  console.log(movie);
+
   try {
 
     // Need for token here

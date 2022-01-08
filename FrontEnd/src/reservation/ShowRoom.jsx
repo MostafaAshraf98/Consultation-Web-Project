@@ -6,13 +6,15 @@ import LoginPopup from '../Login/LoginPopup';
 import CreditCard from './CreditCard';
 import { Link } from 'react-router-dom';
 import { AddReservation , GetUserSeatsbyMovieTitle , GetSeatsbyMovieTitle } from "../service/seatServices";
-
+import { GetMoviebyTitle } from "../service/movieServices";
 
  const ShowRoom = () => {
 
     const navStyle={ color:'white'};
     const { text } = useParams();
     const { num } = useParams();
+
+    const [image, setImages] = useState();
     // const [isNum, setNum] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
     const [isCreditOpen, setCreditOpen] = useState(false);
