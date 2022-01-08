@@ -20,6 +20,7 @@ app.use(upload.array());
 app.use(express.static('public'));
 
 app.use(cors()); // Use this after the variable declaration
+
 // app.UseCors(options => options.AllowAnyOrigin());
 // app.use(function (req, res, next) {
 //     req.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from

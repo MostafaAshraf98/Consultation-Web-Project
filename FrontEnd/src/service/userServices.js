@@ -40,12 +40,12 @@ export async function UserSignup(object) {
 
 export async function UserLogin(object) {
   try {
+    console.log(object);
     const response = await axios.post(SERVER_URL + 'user/login', object, {
       crossDomain: true
     });
     // const response = await axios.get( SERVER_URL+'user?id='+0);
     //Success
-    console.log(object);
 
     return (response)
   } catch (error) {
