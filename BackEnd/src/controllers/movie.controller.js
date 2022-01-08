@@ -67,8 +67,10 @@ const addMovie = async (req, res) => {
 }
 
 const getMovies = async (req, res) => {
+    console.log("Getting movies endpoint");
     try {
         const allMovies = await Movie.find({}, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 });
+        console.log(allMovies);
         res.status(200).send(allMovies);
     } catch (error) {
         res.status(400).send({ error: "Could not get the movies from db" });

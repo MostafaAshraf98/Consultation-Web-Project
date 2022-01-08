@@ -30,7 +30,7 @@
     "serverStart": "node server.js",
     "eject": "react-scripts eject"
   },
-  "proxy":"http://localhost:8086/api/",
+  "proxy": "http://localhost:8086/api/",
   "eslintConfig": {
     "extends": [
       "react-app",

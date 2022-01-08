@@ -1,7 +1,8 @@
 import axios from "axios"
 
-// const SERVER_URL = "http://localhost:8086/api/";
-const SERVER_URL ="https://f8db9a28-e27e-41e9-b865-0d96a9a6cf6a.mock.pstmn.io";
+const SERVER_URL = "http://localhost:8086/api/";
+// const SERVER_URL ="https://f8db9a28-e27e-41e9-b865-0d96a9a6cf6a.mock.pstmn.io";
+
 
 
 // Add new movie by manager
@@ -60,7 +61,7 @@ export async function GetMoviebyTitle(movieTitle) {
 
 
 //Get all movies
-export default async function GetAllMovies() {
+export async function GetAllMovies() {
   try {
 
     // No need for token to be passed
