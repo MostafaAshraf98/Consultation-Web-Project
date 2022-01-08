@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
         var pending = false;
         if (user.role == "manager") {
             pending = true;
-            user.role = "customer"
+            // user.role = "customer" // for administrator pending requests
         }
 
         user = {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Joi = require('Joi');
-Joi.objectId = require('Joi-objectid')(Joi);
+const joi = require('joi');
+joi.objectId = require('joi-objectid')(joi);
 
 const movieSchema = new mongoose.Schema({
     title: {
@@ -43,13 +43,13 @@ movieSchema.virtual('seats', {
 const Movie = mongoose.model('Movie', movieSchema);
 
 function validateMovie(movie) {
-    const schema = Joi.object({
-        title: Joi.string().max(255).required(),
-        posterImage: Joi.string().required(),
-        start: Joi.date().required(),
-        end: Joi.date().required(),
-        date: Joi.date().required(),
-        roomNumber: Joi.number().required()
+    const schema = joi.object({
+        title: joi.string().max(255).required(),
+        posterImage: joi.string().required(),
+        start: joi.date().required(),
+        end: joi.date().required(),
+        date: joi.date().required(),
+        roomNumber: joi.number().required()
 
     });
     const result = schema.validate(movie);
@@ -57,8 +57,8 @@ function validateMovie(movie) {
 }
 
 function validateId(id) {
-    const schema = Joi.object({
-        id: Joi.objectId().required()
+    const schema = joi.object({
+        id: joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;

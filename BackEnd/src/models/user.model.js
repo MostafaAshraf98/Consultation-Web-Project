@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-const Joi = require("Joi");
-Joi.objectId = require('Joi-objectid')(Joi);
+const joi = require("joi");
+joi.objectId = require('joi-objectid')(joi);
 const validator = require('validator');
 const emailvalidator = require("email-validator");
 
@@ -63,20 +63,20 @@ userSchema.virtual('seats', {
 })
 
 function validateId(id) {
-    const schema = Joi.object({
-        id: Joi.objectId().required()
+    const schema = joi.object({
+        id: joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;
 }
 function validateUser(user) {
-    const schema = Joi.object({
-        firstName: Joi.string().min(1).max(255).required(),
-        lastName: Joi.string().min(1).max(255).required(),
-        userName: Joi.string().min(1).max(255).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().min(1).max(50).required(),
-        role: Joi.string().required().valid('customer', 'manager', 'administrator')
+    const schema = joi.object({
+        firstName: joi.string().min(1).max(255).required(),
+        lastName: joi.string().min(1).max(255).required(),
+        userName: joi.string().min(1).max(255).required(),
+        email: joi.string().email().required(),
+        password: joi.string().min(1).max(50).required(),
+        role: joi.string().required().valid('customer', 'manager', 'administrator')
     })
     const result = schema.validate(user);
     return result;

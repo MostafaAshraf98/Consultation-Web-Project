@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Joi = require('Joi');
-Joi.objectId = require('Joi-objectid')(Joi);
+const joi = require('joi');
+joi.objectId = require('joi-objectid')(joi);
 
 
 const seatReservationsSchema = mongoose.Schema({
@@ -27,17 +27,17 @@ const seatReservationsSchema = mongoose.Schema({
 const SeatReservations = mongoose.model('SeatReservations', seatReservationsSchema);
 
 function validateId(id) {
-    const schema = Joi.object({
-        id: Joi.objectId().required()
+    const schema = joi.object({
+        id: joi.objectId().required()
     });
     const result = schema.validate(id);
     return result;
 }
 
 function validateSeat(seat) {
-    const schema = Joi.object({
-        seatNumber: Joi.array().items(Joi.number()).required(),
-        movieIn: Joi.string().required()
+    const schema = joi.object({
+        seatNumber: joi.array().items(joi.number()).required(),
+        movieIn: joi.string().required()
     })
     const result = schema.validate(seat);
     return result;
