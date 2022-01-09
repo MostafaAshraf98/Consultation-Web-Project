@@ -68,8 +68,8 @@ var def=false;
                     def1=false;
                     
                 }
-                setDefined1(def1);
             });
+            setDefined1(def1);
         var def3=false;
         if(isLoggedIn){
             GetUserSeatsbyMovieTitle(text).then((response) => {

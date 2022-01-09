@@ -10,7 +10,7 @@ export async function AddReservation(object) {
   try {
 
     // Need for token here
-    const response = await axios.post(SERVER_URL + 'reservation', object, { headers: { token: localStorage.token } });
+    const response = await axios.post(SERVER_URL + 'reservation', object, { headers: { Authorization:localStorage.token } });
 
 
     return (response)
@@ -36,7 +36,7 @@ export async function GetUserSeatsbyMovieTitle(movieTitle) {
 
 
     // we should not pass token here .. al customers can view the movie page 
-    const response = await axios.get(SERVER_URL+'reservation/'+movieTitle,{headers:{token:localStorage.token}});
+    const response = await axios.get(SERVER_URL+'reservation/'+movieTitle,{headers:{ Authorization:localStorage.token}});
 
 
     return (response)
@@ -60,7 +60,7 @@ export async function GetUserMovies() {
 
   try {
     // we should not pass token here .. al customers can view the movie page 
-    const response = await axios.get(SERVER_URL+'reservation/',{headers:{token:localStorage.token}});
+    const response = await axios.get(SERVER_URL+'reservation/',{headers:{ Authorization:localStorage.token}});
 
     return (response)
   } catch (error) {

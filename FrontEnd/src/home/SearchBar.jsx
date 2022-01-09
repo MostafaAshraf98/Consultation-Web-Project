@@ -9,7 +9,7 @@ function SearchBar(props) {
     const search = <FontAwesomeIcon icon={faSearch} color="DarkGrey"/>
     
     const [title,setTitle] = useState("");
-
+    const [defined,setDefined]=useState(false);
     const handleInputTitle = (event) => {
         const Tt  = event.target.value;
         setTitle(Tt);
@@ -25,6 +25,22 @@ function SearchBar(props) {
             //     console.log(response);
             //     props.onSearchRequest();
             // })
+            var def=false;
+            GetMoviebyTitle(title).then((response) => {
+                console.log("The response is ");
+                if(response)
+                {
+                    def=true;
+                    props.onSearchRequest(response.data);
+                }
+                else{
+                  def=false;
+                }
+                console.log("def=",defined);
+                console.log(response);
+                setDefined(def);
+               
+              });
             
           }
 

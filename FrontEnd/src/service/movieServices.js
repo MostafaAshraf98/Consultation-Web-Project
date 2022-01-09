@@ -92,7 +92,7 @@ export async function GetAllMovies() {
 //Edit movie info by manager
 export async function EditMovieInfo(title, object) {
   try {
-    const response = await axios.put(SERVER_URL + 'movie/' + title, object, { headers: { token: localStorage.token } })
+    const response = await axios.put(SERVER_URL + 'movie/' + title, object, { headers: {  Authorization: localStorage.token } })
     //Success
     return (response)
   } catch (error) {
