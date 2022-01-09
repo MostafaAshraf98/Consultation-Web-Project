@@ -84,7 +84,7 @@ const getMovieBytitle = async (req, res) => {
         console.log(title);
         if (title == "")
             return res.status(401).send("Please enter the title");
-        const movie = await Movie.findOne({ title: title }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 });
+        const movie = await Movie.find({ title: title }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 });
         if (!movie)
             return res.status(401).send({ error: "Could not find this movie" });
         res.status(200).send(movie);
