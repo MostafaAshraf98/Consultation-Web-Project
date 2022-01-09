@@ -5,7 +5,7 @@ const { User } = require('../models/user.model');
 const auth = async (req, res, next) => {
     console.log("Authenticating");
     try {
-        const token = req.header('token').replace('Bearer ', '') // here we are removing the bearer part from the header ( we past the part we want to replace and the string we want to replace it with)
+        const token = req.header('Authorization').replace('Bearer ', '') // here we are removing the bearer part from the header ( we past the part we want to replace and the string we want to replace it with)
         const decoded = jwt.verify(token, 'authenticating') //Here decoded is an object that have the property of the unique identifier that we passed when we first created the token
         const user = await User.findOne({ _id: decoded._id });//we used the string property name because there is a special char in it '.'
         //we are finding a user with that id that we extracted from the token that the requester passed in the header and with this token valid (not expired) in the token array
@@ -18,6 +18,7 @@ const auth = async (req, res, next) => {
         next()
 
     } catch (error) {
+        console.log(error);
         res.status(401).send({ error: 'Please authenticate' })
     }
 };
