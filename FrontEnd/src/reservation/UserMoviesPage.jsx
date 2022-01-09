@@ -16,12 +16,23 @@ const UserMoviesPage = () => {
     //    { posterImage: 'https://picsum.photos/seed/picsum/200/300',title:"image6"  }]);
 
     const [images, setImages] = useState([]);
-
+    const [defined,setDefined]=useState(false);
+    var def=false;
     useEffect(() => {
         //get user photos
+        
         GetUserMovies().then((response) => {
-          console.log(response.data);
+            if(response)
+            {
+                def=true;
+          console.log("first:",response.data);
           setImages(response.data);
+            }
+            else
+            {
+                def=false;
+            }
+            setDefined(def);
         });
       }, []);
 
@@ -34,13 +45,13 @@ const UserMoviesPage = () => {
               {/* <SearchBar/> */}
             </div>
             <div className='container_reserved'>
-                <div className='disp_reser_div'>
+               {defined&&<div className='disp_reser_div'>
                     { images!=undefined&&images.map((image) => (
                     <ViewReservation
                     url={image.posterImage}
                     title={image.title} /> )) }
 
-                </div>
+                </div>}
 
             </div>
             

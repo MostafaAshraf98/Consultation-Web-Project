@@ -18,13 +18,14 @@ import { GetMoviebyTitle } from "../service/movieServices";
     // const [isNum, setNum] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
     const [isCreditOpen, setCreditOpen] = useState(false);
-    
-    const [isLoggedIn, setLoggedIn] = useState(true);
+    const [defined,setDefined]=useState(false);
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const [isRoom_2,setRoom_2] = useState(true);
     
     const [soldSeatArr, setSoldSeatArr] = useState([]);
     const [selectedSeatArr, setSelectedSeatArr]= useState([]);
-
+    const [definedTitle,setDefinedTitle]=useState(false);
+    const [definedUser,setDefinedUser]=useState(false);
     // define ref object
     const renderedElements = useRef({});
     // if(num == 0){
@@ -33,38 +34,65 @@ import { GetMoviebyTitle } from "../service/movieServices";
     // else{
     //     setNum(true);
     // }
-
+var def=false;
     useEffect(() => {
 
 
         GetMoviebyTitle(text).then((response) => {
             console.log("The response is ");
             console.log(response);
-            setImages(response.data);
-          });
-
+            if(response)
+                {
+                    def=true;
+                    setImages(response.data);
+                }
+                else{
+                    def=false;
+                }
+            });
+            setDefined(def);
         //get user photos
+        var def2=false;
         GetSeatsbyMovieTitle(text).then((response) => {
-          console.log(response.data);
-          setSoldSeatArr(response.data);
+            console.log("response bass=",response);
+            if(response)
+            {
+              console.log(response.data);
+              def2=true;
+             setSoldSeatArr(response.data);
+          }
+          else{
+              def2=false;
+          }
+          setDefinedTitle(def2);
         });
+        var def3=false;
         if(isLoggedIn){
             GetUserSeatsbyMovieTitle(text).then((response) => {
+                if(response)
+                {
+                    def3=true;
                 console.log(response.data);
                 setSelectedSeatArr(response.data);
+                }
+                else{
+                    def3=false;
+                }
+                setDefinedUser(def3);
               });
         }
       }, []);
 
-
-      if(image.room == 2)
+if(defined)
+{
+      if(image.roomNumber == 2)
       {
         setRoom_2(true);
       }
       else{
         setRoom_2(false);
       }
-
+    }
     const idArray=["1","6","11","13","14","15","25","30"];
     var s="screen";
     $('#'+ s).addClass("seat");
@@ -144,7 +172,7 @@ import { GetMoviebyTitle } from "../service/movieServices";
                         <small>Reserved</small>
                     </li>
                 </ul> 
-                <div className="container">
+               <div className="container">
                     <div className="screen"></div>
 
                    

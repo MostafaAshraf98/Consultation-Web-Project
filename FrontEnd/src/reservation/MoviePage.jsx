@@ -14,6 +14,7 @@ const MoviePage = () => {
   const navStyle = { color: "white" };
   const [image, setImages] = useState();
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [defined,setDefined]=useState(false);
   const toggleEditModal = () => {
     console.log("edit");
     setEditModalOpen(!isEditModalOpen);
@@ -32,17 +33,27 @@ const MoviePage = () => {
   function show() {
     $(".PopUp_Edit").addClass("active");
   }
-
+var def=false;
   useEffect(() => {
     //get user photos
     console.log("Entering the useEffect");
+
     GetMoviebyTitle(text).then((response) => {
       console.log("The response is ");
+      if(response)
+      {
+          def=true;
+          setImages(response.data);
+      }
+      else{
+        def=false;
+      }
+      console.log("def=",defined);
       console.log(response);
-      setImages(response.data);
+      setDefined(def);
     });
-  }, [image]);
-
+  }, []);
+  
   //   var photo;
   //   useState(() => {
   //     console.log("Entering the useEffect");
@@ -52,28 +63,27 @@ const MoviePage = () => {
   //       console.log(response);
   //     });
   //   });
-
-  //   setImages(photo);
-
+ 
   console.log({
     "image: ": image,
   });
   return (
     <>
       <div className="movieInfo">
-        <img className="moviePoster" src={url} />
+        {defined &&<img className="moviePoster" src={image.posterImage} />}
         <div className="movieText">
-          {/* <h1 className="movieName">{image.title} </h1> */}
-          <h1 className="movieName"> Happy </h1>
+            {defined && <h1 className="movieName">{image.title} </h1>}
+          {/* <h1 className="movieName"> Happy </h1> */}
           <br />
           <br />
-          {/* <h2 className="movieDate">{image.date}</h2> */}
-          <h2 className="movieDate"> 12/12/2020</h2>
+          
+          {defined && <h2 className="movieDate">Movie Date : {image.date}</h2>}
+          {/* <h2 className="movieDate"> 12/12/2020</h2> */}
           <br />
-          {/* <h2 className="movieDate">{image.start}</h2> */}
-          <h2 className="movieDate"> 5 Pm</h2>
+          {defined &&<h2 className="movieDate">Start Time : {image.start}</h2>}
+          {/* <h2 className="movieDate"> 5 Pm</h2> */}
           <br />
-          <h2 className="movieDate"> 2 </h2>
+          {defined &&<h2 className="movieDate"> Room number : {image.roomNumber} </h2>}
           <br />
           <div className="popcorn"></div>
           <main className="main_edit">
