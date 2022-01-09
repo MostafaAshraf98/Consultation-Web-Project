@@ -41,7 +41,7 @@ function Home() {
       console.log(response.data);
       setImages(response.data);
     });
-  }, []);
+  }, [images]);
 
   //----------------------------------- To check with
   //    //get request

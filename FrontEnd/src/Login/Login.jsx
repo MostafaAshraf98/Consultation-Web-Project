@@ -101,7 +101,7 @@ function Login() {
 
   const loginObj = {
     password: password,
-    emailorusername: username,
+    emailorusername: email,
   };
 
   function SIGN() {
@@ -257,11 +257,19 @@ function Login() {
             />
 
             {/* Call backEnd request -- based on response .. route to home/ not  */}
+            {/* <button type="submit" className="submitBttn" onClick={handleLogin}>
+              LOG IN
+            </button>
+            {isLoggedIn && <Navigate to="/" />} */}
+
+            <Link className="skipLink" style={navStyle} to={`/`}>
             <button type="submit" className="submitBttn" onClick={handleLogin}>
               LOG IN
             </button>
-            {isLoggedIn && <Navigate to="/" />}
+        </Link>
+
           </form>
+          
 
           <form className="inputGroupSignUp">
             <input
@@ -338,6 +346,16 @@ function Login() {
             </select>
 
             {/* Call backEnd request -- Post */}
+            {/* <button
+              type="submit"
+              id="submitS"
+              className="submitBttn"
+              onClick={handleSignUp}
+            >
+              SIGN UP
+            </button>
+            {isLoggedIn && <Navigate to="/" />} */}
+            <Link className="skipLink" style={navStyle} to={`/`}>
             <button
               type="submit"
               id="submitS"
@@ -346,7 +364,7 @@ function Login() {
             >
               SIGN UP
             </button>
-            {isLoggedIn && <Navigate to="/" />}
+        </Link>
           </form>
         </div>
       </div>
