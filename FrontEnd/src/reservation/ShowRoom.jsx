@@ -18,7 +18,7 @@ import { GetMoviebyTitle } from "../service/movieServices";
     // const [isNum, setNum] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
     const [isCreditOpen, setCreditOpen] = useState(false);
-    const [defined,setDefined]=useState(false);
+    const [defined1,setDefined1]=useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isRoom_2,setRoom_2] = useState(true);
     
@@ -38,19 +38,7 @@ var def=false;
     useEffect(() => {
 
 
-        GetMoviebyTitle(text).then((response) => {
-            console.log("The response is ");
-            console.log(response);
-            if(response)
-                {
-                    def=true;
-                    setImages(response.data);
-                }
-                else{
-                    def=false;
-                }
-            });
-            setDefined(def);
+          
         //get user photos
         var def2=false;
         GetSeatsbyMovieTitle(text).then((response) => {
@@ -66,6 +54,22 @@ var def=false;
           }
           setDefinedTitle(def2);
         });
+        var def1=false;
+        GetMoviebyTitle(text).then((response) => {
+            console.log("The response is ");
+            console.log(response);
+            if(response)
+                {
+                    def1=true;
+                    setImages(response.data);
+            
+                }
+                else{
+                    def1=false;
+                    
+                }
+            });
+            setDefined1(def1);
         var def3=false;
         if(isLoggedIn){
             GetUserSeatsbyMovieTitle(text).then((response) => {
@@ -82,9 +86,10 @@ var def=false;
               });
         }
       }, []);
-
-if(defined)
+    
+if(defined1)
 {
+    console.log("img room num=",image.roomNumber);
       if(image.roomNumber == 2)
       {
         setRoom_2(true);
@@ -92,7 +97,7 @@ if(defined)
       else{
         setRoom_2(false);
       }
-    }
+ }
     const idArray=["1","6","11","13","14","15","25","30"];
     var s="screen";
     $('#'+ s).addClass("seat");

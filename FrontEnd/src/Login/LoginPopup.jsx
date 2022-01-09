@@ -13,41 +13,42 @@ function LoginPopup(props) {
     const [role,setRole] = useState("");
     const [fname,setFirstname] = useState("");
     const [lname,setLastname] = useState("");
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    var x = false;
 
     const handleLogin = () => {
         
-            // UserLogin(loginObj).then( response => {
-            //      localStorage.setItem('token', response);
-            //     console.log(response);
-            // });
-        //------------ call backEnd fn Login
-        //------------ save returned token in local storage using the next line
-        // if(response ==null)
-        // {
-        //    setLoggedIn(false);
-        // }
-        // else{
-        //     setLoggedIn(true);
-        // }
+        console.log("Handling login");
+        UserLogin(loginObj).then((response) => {
+          console.log("entered the user login handler");
+          if (!response.error) localStorage.setItem("token", response.data.token);
+          //  localStorage.setItem('role', response.data.role);
+          console.log(response);
+          if (!response.error) {
+            x = false;
+          } else {
+            x = true;
+          }
+        });
+        setLoggedIn(x);
+        console.log("IsLogged in value is:");
+        console.log(isLoggedIn);
+        // ------------ call backEnd fn Login
+        // ------------ save returned token in local storage using the next line
     }
 
     const handleSignUp = () => {
-        // event.preventDefault();
+          // event.preventDefault();
 
-        // UserSignup(signUpObj).then( response => {
-        //     localStorage.setItem('token', response);
-        //     console.log(response);
-        // });
-        // //------------ call backEnd fn SignUp --- POST
-        // //------------ save returned token in local storage using the next line
-        // if(response ==null)
-        // {
-        //    setLoggedIn(false);
-        // }
-        // else{
-        //     setLoggedIn(true);
-        // }
-
+    UserSignup(signUpObj).then((response) => {
+        localStorage.setItem("token", response);
+        console.log(response);
+        if (response == null) {
+          setLoggedIn(false);
+        } else {
+          setLoggedIn(true);
+        }
+      });
     }
     const handleChangeUsername = (event) => {
         

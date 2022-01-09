@@ -10,7 +10,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 function SideBar() {
-    // const SideBar = (props) => { 
+   //  const SideBar = (props) => { 
 
     const navStyle={ color:'white'};
     const signUp = <FontAwesomeIcon icon={faUserPlus} color="White"/>
