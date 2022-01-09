@@ -53,7 +53,7 @@ const getMovieSeatsByTitleForGuest = async (req, res) => {
         const reservedSeats = await SeatReservations.find({ movieIn: movieId }, { _id: 0, seatNumber: 1 })
         const arr = [];
         for (seat of reservedSeats)
-            arr.push(seat.seatNumber)
+            arr.push(seat.seatNumber.toString())
         res.status(200).send(arr);
 
     } catch (error) {
@@ -77,10 +77,10 @@ const getUserReservedSeatsinMovie = async (req, res) => {
         const users = [];
         const others = []
         for (reservation of userReservedMovieSeats)
-            users.push(reservation.seatNumber)
+            users.push(reservation.seatNumber.toString())
 
         for (reservation of otherReservedMovieSeats)
-            others.push(reservation.seatNumber)
+            others.push(reservation.seatNumber.toString())
         res.status(200).send({ userReservedSeats: users, otherReservedSeats: others });
     } catch (error) {
         console.log(error);
