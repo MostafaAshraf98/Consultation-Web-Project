@@ -25,6 +25,8 @@ function Login() {
     UserLogin(loginObj).then((response) => {
       console.log("entered the user login handler");
       if (!response.error) localStorage.setItem("token", response.data.token);
+      // if (!response.error) localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWQ5NTgxM2NlY2U5YzAyMGQ0ODUwZDciLCJpYXQiOjE2NDE3MjY1NDF9.eWlFwAFH7RyjkbsnlJEnMkFieTdVtFEFbrvVnAPMBA0");
+
       //  localStorage.setItem('role', response.data.role);
       console.log(response);
       if (!response.error) {

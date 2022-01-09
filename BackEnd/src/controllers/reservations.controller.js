@@ -91,6 +91,7 @@ const getUserReservedSeatsinMovie = async (req, res) => {
 const getMoviesReservedIn = async (req, res) => {
     const userId = req.authUser._id;
     try {
+        console.log("Getting movies reserved in");
         const MoviesReservedIn = await SeatReservations.find({ userReservation: userId }, { _id: 0, movieIn: 1 }).populate("movieIn");
         const movieTitles = []
         const uniqueMovies = []

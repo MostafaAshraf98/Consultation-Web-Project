@@ -70,20 +70,20 @@ var def=false;
   return (
     <>
       <div className="movieInfo">
-        {defined &&<img className="moviePoster" src={image.posterImage} />}
+        {defined &&<img className="moviePoster" src={image[0].posterImage} />}
         <div className="movieText">
-            {defined && <h1 className="movieName">{image.title} </h1>}
+            {defined && <h1 className="movieName">{image[0].title} </h1>}
           {/* <h1 className="movieName"> Happy </h1> */}
           <br />
           <br />
           
-          {defined && <h2 className="movieDate">Movie Date : {image.date}</h2>}
+          {defined && <h2 className="movieDate">Movie Date : {image[0].date}</h2>}
           {/* <h2 className="movieDate"> 12/12/2020</h2> */}
           <br />
-          {defined &&<h2 className="movieDate">Start Time : {image.start}</h2>}
+          {defined &&<h2 className="movieDate">Start Time : {image[0].start}</h2>}
           {/* <h2 className="movieDate"> 5 Pm</h2> */}
           <br />
-          {defined &&<h2 className="movieDate"> Room number : {image.roomNumber} </h2>}
+          {defined &&<h2 className="movieDate"> Room number : {image[0].roomNumber} </h2>}
           <br />
           <div className="popcorn"></div>
           <main className="main_edit">
