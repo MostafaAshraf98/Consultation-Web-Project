@@ -78,10 +78,10 @@ export async function GetUserMovies() {
 }
 
 // get seats by title .. showroom guest
-export async function GetSeatsbyMovieTitle() {
+export async function GetSeatsbyMovieTitle(title) {
 
   try {
-    const response = await axios.get(SERVER_URL + 'reservation/', {
+    const response = await axios.get(SERVER_URL + 'reservation/guest/'+title, {
       crossDomain: true
     });
 
